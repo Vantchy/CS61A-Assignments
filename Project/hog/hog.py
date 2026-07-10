@@ -171,6 +171,17 @@ def play(strategy0, strategy1, update,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    while score0 < goal and score1 < goal:
+        num_rolls0 = strategy0(score0,score1)
+        score0 = update(num_rolls0, score0, score1, dice)
+        if score0 < goal:
+            who = 1- who
+            num_rolls1 = strategy1(score1,score0)
+            score1 =  update(num_rolls1, score1, score0, dice)
+            if score1 >= goal:
+                return score0,score1
+        else:
+            return score0, score1
     # END PROBLEM 5
     return score0, score1
 
@@ -196,6 +207,8 @@ def always_roll(n):
     assert n >= 0 and n <= 10
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    num = lambda x,y :  n
+    return num
     # END PROBLEM 6
 
 
@@ -227,6 +240,19 @@ def is_always_roll(strategy, goal=GOAL):
     """
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    roll_num = strategy(0,0)
+    for i in range(0,goal):
+        a = i
+        roll_num2 = strategy(0,a)
+        if roll_num2 == roll_num:
+            for m in range (0,goal):
+                b = m
+                roll_num3 = strategy(b,a)
+                if not roll_num3 == roll_num2:
+                    return False
+        else:
+            return False
+    return True
     # END PROBLEM 7
 
 
@@ -243,6 +269,11 @@ def make_averaged(original_function, times_called=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    total = 0
+    for i in range (1,times_called+1):
+        a =
+
+    return total/times_called
     # END PROBLEM 8
 
 
