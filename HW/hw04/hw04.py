@@ -13,6 +13,14 @@ def shuffle(s):
     """
     assert len(s) % 2 == 0, 'len(seq) must be even'
     "*** YOUR CODE HERE ***"
+    n = len(s)
+    first_half = s[:n//2]
+    last_half = s[n//2:]
+    result = []
+    for i in range(0,n//2):
+        result.append(first_half[i])
+        result.append(last_half[i])
+    return result
 
 
 def deep_map(f, s):
@@ -38,6 +46,11 @@ def deep_map(f, s):
     True
     """
     "*** YOUR CODE HERE ***"
+    for i in range(len(s)):
+        if not isinstance(s[i],list):
+            s[i] = f(s[i])
+        else :
+            deep_map(f, s[i])
 
 
 HW_SOURCE_FILE=__file__
@@ -47,11 +60,13 @@ def planet(mass):
     """Construct a planet of some mass."""
     assert mass > 0
     "*** YOUR CODE HERE ***"
+    return ['planet',mass]
 
 def mass(p):
     """Select the mass of a planet."""
     assert is_planet(p), 'must call mass on a planet'
     "*** YOUR CODE HERE ***"
+    return p[1]
 
 def is_planet(p):
     """Whether p is a planet."""
@@ -104,6 +119,17 @@ def balanced(m):
     True
     """
     "*** YOUR CODE HERE ***"
+    left_length = length(left(m))
+    right_length = length(right(m))
+    if left_length*total_mass(end(left(m))) != right_length*total_mass(end(right(m))):
+        return False
+    if is_mobile(end(left(m))) and not balanced(end(left(m))):
+        return False
+    if is_mobile(end(right(m))) and not balanced(end(right(m))):
+        return False
+    return True
+
+        
 
 
 def berry_finder(t):
@@ -124,6 +150,14 @@ def berry_finder(t):
     True
     """
     "*** YOUR CODE HERE ***"
+    if label(t) == 'berry':
+        return True
+    else:
+        for branch in branches(t):
+            if berry_finder(branch):
+                return True
+    return False
+
 
 
 HW_SOURCE_FILE=__file__
@@ -139,6 +173,12 @@ def max_path_sum(t):
     17
     """
     "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return label(t)
+    else:
+        return label(t)+ max(max_path_sum(branch) for branch in branches(t))
+
+
 
 
 def mobile(left, right):
