@@ -176,7 +176,12 @@ def max_path_sum(t):
     if is_leaf(t):
         return label(t)
     else:
-        return label(t)+ max(max_path_sum(branch) for branch in branches(t))
+        answer = 0
+        for branch in branches(t):
+            a = max_path_sum(branch)
+            if answer < a :
+                answer = a
+        return label(t) + answer
 
 
 
