@@ -194,7 +194,21 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     'testing'
     """
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+    another_list = []
+    my_list = []
+    for word in word_list :
+        if typed_word == word :
+            return typed_word
+        else:
+            a = diff_function(typed_word,word, limit)
+            if a <= limit :
+                another_list.append(word)
+                my_list.append(a)
+    if my_list == []:
+        return typed_word
+    else:
+        b = my_list.index (min (my_list))
+        return another_list[b]
     # END PROBLEM 5
 
 
@@ -221,7 +235,16 @@ def furry_fixes(typed, source, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    m = abs(len(typed) - len(source))
+    if m > limit:
+        return random.randint(limit + 1,m + 1)
+    if len(typed) == 0 or len(source) == 0:
+        return abs(len(typed)-len(source))
+    else:
+        if not typed[0] == source[0]:
+            return furry_fixes(typed[1:], source[1:], limit - 1) + 1
+        else :
+            return furry_fixes(typed[1:], source[1:], limit)
     # END PROBLEM 6
 
 
@@ -242,23 +265,21 @@ def minimum_mewtations(typed, source, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
-    if ___________: # Base cases should go here, you may add more base cases as needed.
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-    # Recursive cases should go below here
-    if ___________: # Feel free to remove or add additional cases
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    a = abs(len(typed)-len(source))
+    if a > limit :
+        return random.randint(limit + 1,a + 1)
+    if typed == '' or source == '':
+        return a
+    if typed == source :
+        return 0
     else:
-        add = ... # Fill in these lines
-        remove = ...
-        substitute = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+        if typed[0] == source[0]:
+            return minimum_mewtations(typed[1:], source[1:], limit)
+        else :
+            add = 1 + minimum_mewtations(source[0] + typed, source, limit - 1)
+            remove = 1 + minimum_mewtations(typed[1:], source, limit - 1)
+            substitute =1 + minimum_mewtations(source[0] + typed[1:], source, limit - 1)
+        return min (add,remove,substitute)
 
 
 # Ignore the line below
@@ -304,6 +325,7 @@ def report_progress(typed, source, user_id, upload):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    
     # END PROBLEM 8
 
 
