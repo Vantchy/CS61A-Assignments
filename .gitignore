@@ -1,3 +1,15 @@
 # Ignore macOS system files used to store folder metadata
 .DS_Store
 
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# ok autograder local cache
+.ok_storage
+.ok_history
+
+# Virtual environments
+.venv/
+venv/
